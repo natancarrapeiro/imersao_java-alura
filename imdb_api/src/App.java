@@ -8,13 +8,12 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.util.List;
 import java.util.Map;
 
-
 public class App {
 
     public static void main(String[] args) throws Exception {
 
         // fazer uma conexão HTTP e buscar os top 250 filmes
-        // String url = "https://imdb-api.com/en/API/Top250Movies/k_0ojt0yvm";
+        //String url = "https://imdb-api.com/en/API/Top250Movies/k_0ojt0yvm";
         String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java/api/TopMovies.json";
         URI endereco = URI.create(url);
         var client = HttpClient.newHttpClient();
@@ -29,17 +28,16 @@ public class App {
         // exibir e manipular os dados 
         var geradora = new GeradoraDeFifurinhas();
         for (Map<String,String> filme : listaDeFilmes) {
-            String urlImg=filme.get("image");
-            String titulo=filme.get("image");
 
-            InputStream inputStream = new URL(urlImg).openStream();
-            String nomeArquivo= titulo+".png";
-            
-            geradora.cria(inputStream,nomeArquivo );
+            String urlImagem = filme.get("image");
+            String titulo = filme.get("title");
 
-            System.out.println(titulo);//entra no map e oega a chave " key "
-            System.out.println();
-            System.out.println(filme.get("imDbRating"));
+            InputStream inputStream = new URL(urlImagem).openStream();
+            String nomeArquivo = titulo + ".png";
+
+            geradora.cria(inputStream, nomeArquivo);
+
+            System.out.println(titulo);
             System.out.println();
         }
     }
